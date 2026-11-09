@@ -1,0 +1,191 @@
+:root {
+  --sp-green: #1DB954;
+  --sp-black: #191414;
+  --sp-white: #FFFFFF;
+  --bg-primary: #000000;
+  --bg-base: #121212;
+  --bg-header: rgba(18, 18, 18, 0.7);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  background: var(--bg-primary);
+  font-family: 'Circular', system-ui, -apple-system, sans-serif;
+}
+
+.app-header {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  background: var(--bg-header);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+
+.logout-btn {
+  padding: 8px 32px;
+  background: var(--sp-white);
+  color: #000;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.logout-btn:hover {
+  transform: scale(1.04);
+}
+
+/* === BULLETPROOF SPOTIFY SLIDER === */
+input[type="range"].my-spotify-slider {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 100%;
+  height: 4px !important;
+  border-radius: 2px !important;
+  background: linear-gradient(to right, #FFFFFF var(--slider-progress, 0%), rgba(255,255,255,0.2) var(--slider-progress, 0%)) !important;
+  outline: none !important;
+  cursor: pointer !important;
+  transition: background 0.1s ease !important;
+}
+
+input[type="range"].my-spotify-slider:hover {
+  background: linear-gradient(to right, #1DB954 var(--slider-progress, 0%), rgba(255,255,255,0.2) var(--slider-progress, 0%)) !important;
+}
+
+input[type="range"].my-spotify-slider::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background-color: #FFFFFF !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+  margin-top: -4px !important;
+}
+
+input[type="range"].my-spotify-slider::-moz-range-thumb {
+  width: 12px !important;
+  height: 12px !important;
+  border: none !important;
+  border-radius: 50% !important;
+  background-color: #FFFFFF !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+}
+
+input[type="range"].my-spotify-slider::-webkit-slider-runnable-track {
+  height: 4px !important;
+  border-radius: 2px !important;
+}
+
+/* === LYRICS OVERLAY BASE === */
+.lyrics-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; 
+  background-color: var(--bg-base); 
+  z-index: 5; 
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  overflow: hidden; 
+}
+
+.lyrics-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* === EXACT ALBUM COLOR (Mula sa database color gradient) === */
+.lyrics-bg-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; 
+  z-index: 0;
+  transition: background 0.8s ease;
+}
+
+/* === SCROLLABLE CONTAINER === */
+.lyrics-scroll-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding: 0 40px; 
+}
+
+.lyrics-content {
+  text-align: left; 
+  max-width: 800px;
+  width: 100%;
+  padding-top: 40vh; 
+  padding-bottom: 50vh; 
+}
+
+/* === CLEAN & FLAT TEXT STYLES === */
+.lyric-line {
+  font-size: 36px; 
+  font-weight: 800; 
+  margin: 16px 0; 
+  color: #FFFFFF; 
+  opacity: 0.3; 
+  transition: opacity 0.2s ease, text-shadow 0.2s ease; 
+  cursor: pointer;
+  letter-spacing: -0.5px;
+}
+
+.lyric-line:hover {
+  opacity: 0.7; 
+}
+
+.lyric-line.active-lyric {
+  opacity: 1 !important; 
+  color: #FFFFFF !important;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.3); 
+}
+
+/* === LIGHT MODE OVERRIDES === */
+[data-theme="light"] .lyrics-overlay {
+  background-color: #f0f0f0;
+}
+
+[data-theme="light"] .lyric-line {
+  color: #000000; 
+  opacity: 0.3;
+}
+
+[data-theme="light"] .lyric-line:hover {
+  opacity: 0.6;
+}
+
+[data-theme="light"] .lyric-line.active-lyric {
+  color: #000000 !important;
+  opacity: 1 !important;
+}
