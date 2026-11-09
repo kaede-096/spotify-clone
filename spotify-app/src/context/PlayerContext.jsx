@@ -2,8 +2,8 @@ import React, { createContext, useRef, useState, useEffect, useContext } from 'r
 
 export const PlayerContext = createContext();
 
-// Awtomatikong gagamitin ang VITE_BACKEND_URL mula sa Vercel Environment Variables, o localhost kung local dev
-const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+// Kung walang VITE_BACKEND_URL sa Vercel, gagamitin nito ang relative path na '/api' para saluhin ng vercel.json rewrites
+const API_URL = import.meta.env.VITE_BACKEND_URL || '';
 
 export function PlayerProvider({ children }) {
   const audioRef = useRef(new Audio());
@@ -37,7 +37,7 @@ export function PlayerProvider({ children }) {
       setCurrentLyrics([]);
       let audioUrl = song.file;
       
-      // I-format ang URL para gumana sa parehong local at live backend (Render)
+      // I-format ang URL para gumana sa parehong local at live backend
       if (audioUrl.startsWith('http://localhost:5000')) {
         audioUrl = audioUrl.replace('http://localhost:5000', API_URL);
       } else if (!audioUrl.startsWith('http')) {

@@ -13,7 +13,7 @@ app.use(cors({
 
 app.use(express.json());
 
-// Static assets
+// Static assets para sa Vercel
 app.use('/assets', express.static(path.join(__dirname, 'public', 'assets')));
 
 // Database Connection

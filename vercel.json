@@ -8,7 +8,9 @@
     {
       "src": "spotify-app/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
   "routes": [
@@ -18,7 +20,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "spotify-app/$1"
+      "dest": "/spotify-app/dist/$1"
     }
   ]
 }
